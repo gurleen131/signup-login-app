@@ -59,3 +59,31 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     })
     .catch(error => console.error('Error:', error));
 });
+
+// Show Forgot Password Form when clicking "Forgot Password"
+document.getElementById('goToForgotPassword').addEventListener('click', function() {
+    document.getElementById('loginFormContainer').style.display = 'none';
+    document.getElementById('forgotPasswordFormContainer').style.display = 'block';
+});
+
+// Forgot Password Form Submission
+// Forgot Password Form Submission
+document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const username = document.getElementById('forgotPasswordUsername').value;
+
+    fetch('http://localhost:3000/api/auth/forgot-password', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username })
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+    })
+    .catch(error => console.error('Error:', error));
+});
+

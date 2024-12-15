@@ -45,6 +45,18 @@
         .form-container .toggle-btn:hover {
             background-color: #007bb5;
         }
+        .forgot-password-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .forgot-password-btn:hover {
+            background-color: #e53935;
+        }
     </style>
 </head>
 <body>
@@ -58,6 +70,7 @@
         <button type="submit">Login</button>
     </form>
     <button id="goToSignup" class="toggle-btn">Create Account</button>
+    <button id="goToForgotPassword" class="forgot-password-btn">Forgot Password?</button>
 </div>
 
 <!-- Signup Form -->
@@ -71,6 +84,17 @@
     <button id="goToLogin" class="toggle-btn">Login</button>
 </div>
 
+<!-- Forgot Password Form -->
+<div id="forgotPasswordFormContainer" class="form-container" style="display:none;">
+    <h2>Forgot Password</h2>
+    <form id="forgotPasswordForm">
+        <label for="forgotPasswordUsername">Username:</label>
+        <input type="text" id="forgotPasswordUsername" name="forgotPasswordUsername" required>
+        <button type="submit">Submit</button>
+    </form>
+    <button id="goBackToLogin" class="toggle-btn">Back to Login</button>
+</div>
+
 <script>
 // Show Signup Form when clicking "Create Account"
 document.getElementById('goToSignup').addEventListener('click', function() {
@@ -81,6 +105,18 @@ document.getElementById('goToSignup').addEventListener('click', function() {
 // Show Login Form when clicking "Login"
 document.getElementById('goToLogin').addEventListener('click', function() {
     document.getElementById('signupFormContainer').style.display = 'none';
+    document.getElementById('loginFormContainer').style.display = 'block';
+});
+
+// Show Forgot Password Form when clicking "Forgot Password?"
+document.getElementById('goToForgotPassword').addEventListener('click', function() {
+    document.getElementById('loginFormContainer').style.display = 'none';
+    document.getElementById('forgotPasswordFormContainer').style.display = 'block';
+});
+
+// Go back to Login Form when clicking "Back to Login" from Forgot Password
+document.getElementById('goBackToLogin').addEventListener('click', function() {
+    document.getElementById('forgotPasswordFormContainer').style.display = 'none';
     document.getElementById('loginFormContainer').style.display = 'block';
 });
 
@@ -131,7 +167,15 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     })
     .catch(error => console.error('Error:', error));
 });
+
+// Forgot Password Form Submission (simple form without backend)
+document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const username = document.getElementById('forgotPasswordUsername').value;
+    alert('Password reset link sent to ' + username + '\'s email.');
+});
 </script>
+
 <footer style="font-family: sans-serif; font-size:xx-small;">created by Gurleen</footer>
 
 </body>

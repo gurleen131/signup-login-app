@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-app-canary
+  labels:
+    app: node-app
+    version: canary
+spec:
+  replicas: 3  # Number of pod replicas
+  selector:
+    matchLabels:
+      app: node-app
+      version: canary
+  template:
+    metadata:
+      labels:
+        app: node-app
+        version: canary
+    spec:
+      containers:
+      - name: node-app
+        image: gurleen131/node-app:canary
+        ports:
+        - containerPort: 3000

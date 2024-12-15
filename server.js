@@ -62,6 +62,19 @@ app.post('/api/auth/login', async (req, res) => {
     res.status(400).json({ message: 'Invalid credentials' });
   }
 });
+// Forgot Password Route
+app.post('/api/auth/forgot-password', async (req, res) => {
+  const { username } = req.body;
+
+  const user = await User.findOne({ username });
+  if (!user) {
+      return res.status(400).json({ message: 'User not found' });
+  }
+
+  // For simplicity, let's just return a message that the password reset process is initiated
+  // You would typically send a password reset link to the user's email here
+  res.json({ message: 'Password reset link has been sent to your email (not implemented yet)' });
+});
 
 // Catch-all route for serving index.html (if directly accessed via browser)
 app.get('*', (req, res) => {

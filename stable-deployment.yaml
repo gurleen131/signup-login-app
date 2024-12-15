@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-app-stable
+  labels:
+    app: node-app
+    version: stable
+spec:
+  replicas: 3  # Number of pod replicas
+  selector:
+    matchLabels:
+      app: node-app
+      version: stable
+  template:
+    metadata:
+      labels:
+        app: node-app
+        version: stable
+    spec:
+      containers:
+      - name: node-app
+        image: gurleen131/node-app:stable  # Docker image for stable version
+        ports:
+        - containerPort: 3000
